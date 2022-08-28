@@ -5,11 +5,11 @@ using System.Text;
 namespace CabInvoiceGenerator
 {
     /// <summary>
-    /// for what kindOfRideIsTaking
+    /// enum for what kindOfRideIsTaking by subscriber
     /// </summary>
     public enum RideType
     {
-        NORMAL, PREMIUM
+        NORMAL, PREMIUM ,Other
     }
 
 }

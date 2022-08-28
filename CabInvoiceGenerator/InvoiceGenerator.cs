@@ -13,6 +13,9 @@ namespace CabInvoiceGenerator
         private readonly double MINIMUM_COST_PER_KM;
         private readonly int COST_PER_TIME;
         private readonly double MINIMUM_FARE;
+        /// </summary>
+        /// <summary>
+        /// 
         /// Constrcutor To Create RideRepository instance.
         /// </summary>
         /// <summary>
@@ -22,21 +25,25 @@ namespace CabInvoiceGenerator
             this.rideRepository = new RideRepository();
             try
             {
-                //If Ride type is Premium Then Rates Set For Premium else For Normal.
+                //If Ride type is Premium Then Rates Set For Premium;
                 if (rideType.Equals(RideType.PREMIUM))
                 {
                     this.MINIMUM_COST_PER_KM = 15;
                     this.COST_PER_TIME = 2;
                     this.MINIMUM_FARE = 20;
                 }
-                else if (rideType.Equals(RideType.NORMAL))
+                else if (rideType.Equals(RideType.NORMAL)) // If Ride type is Normal Then Rates Set For Normal;
                 {
                     this.MINIMUM_COST_PER_KM = 10;
                     this.COST_PER_TIME = 1;
                     this.MINIMUM_FARE = 5;
                 }
+                else
+                {
+                    throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_RIDE_TYPE, "Invalid Ride Type");
+                }
             }
-            catch (CabInvoiceException)
+            catch (CabInvoiceException) // if Ride type not matches give Exception;
             {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_RIDE_TYPE, "Invalid Ride Type");
             }

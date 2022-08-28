@@ -4,13 +4,16 @@ using System.Text;
 
 namespace CabInvoiceGenerator
 {
-   public class Ride
+    /// <summary>
+    /// Ride class to set data for particular Ride i.e premium or normal;
+    /// </summary>
+    public class Ride
     {
         //Variables.
         public double distance;
         public int time;
         /// <summary>
-        /// Parameter Constructor For Setting Data.
+        /// Parameterised Constructor For Setting Data.
         /// </summary>
         /// <param name="distance"></param>
         /// <param name="time"></param>
