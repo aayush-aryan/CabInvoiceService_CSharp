@@ -23,16 +23,16 @@ namespace CabInvoiceGenerator
                 InvoiceGenerator invoiceGeneratorNormal1 = new InvoiceGenerator(RideType.Other);
                 double Normalfare1 = invoiceGeneratorNormal.CalculateFare(2.0, 5);//calling CalculateFare method
             }
-            catch(CabInvoiceException cabInvoiceException)
+            catch (CabInvoiceException cabInvoiceException)
             {
-                Console.WriteLine("Exception is coming due to "+ cabInvoiceException.Message);
+                Console.WriteLine("Exception is coming due to " + cabInvoiceException.Message);
             }
 
             InvoiceGenerator invoiceGeneratorSummary = new InvoiceGenerator(RideType.NORMAL);
             Ride[] rides = { new Ride(2, 5), new Ride(0.1, 1) };
             InvoiceSummary summary = invoiceGeneratorSummary.CalculateFare(rides);
             Console.WriteLine($"summary : {summary}");
-           
+
         }
     }
 }
