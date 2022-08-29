@@ -10,14 +10,15 @@ namespace CabInvoiceGenerator
         Dictionary<string, List<Ride>> userRides = null;
 
         /// <summary>
-        /// Constructor to Create Dictionary.
+        /// Constructor to initialise Dictionary.
+        /// List<Ride>->taken for store multiple ride for a user
         /// </summary>
         public RideRepository()
         {
             this.userRides = new Dictionary<string, List<Ride>>();
         }
         /// <summary>
-        /// Function to Add Ride List to Specified UserId.
+        /// Function to Add Ride List to the Specified UserId.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="rides"></param>
@@ -40,6 +41,7 @@ namespace CabInvoiceGenerator
         }
         /// <summary>
         /// Function To Get Rides List As an Array for specified UserId. 
+        /// GetRides(string userId)->to retrieve multiple ride for particular User;
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>

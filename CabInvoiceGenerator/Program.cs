@@ -27,6 +27,12 @@ namespace CabInvoiceGenerator
             {
                 Console.WriteLine("Exception is coming due to "+ cabInvoiceException.Message);
             }
+
+            InvoiceGenerator invoiceGeneratorSummary = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { new Ride(2, 5), new Ride(0.1, 1) };
+            InvoiceSummary summary = invoiceGeneratorSummary.CalculateFare(rides);
+            Console.WriteLine($"summary : {summary}");
+           
         }
     }
 }

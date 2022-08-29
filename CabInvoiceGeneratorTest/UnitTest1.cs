@@ -222,5 +222,61 @@ namespace CabInvoiceGeneratorTest
             //Asserting Values
             Assert.AreEqual(expected, Minimumfare);
         }
+
+        //UC2
+        
+        [Test]
+        public void GivenMultipleRideShouldReturn_InvoiceSummarryForNormalRide()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { new Ride(2.0, 5), new Ride(3.0, 5) };//distance/time->25+35->>60
+            InvoiceSummary invoiceSummary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedSummary = new InvoiceSummary(2,60);//noOFRide,TotalFare
+            Assert.AreEqual(expectedSummary, expectedSummary);
+        }
+
+        [Test]
+        public void GivenThreeMultipleRideShouldReturn_InvoiceSummarryForNormalRide()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { new Ride(2.0, 5), new Ride(3.0, 5), new Ride(10.0, 10) };//distance/time->25+35+110->>60
+            InvoiceSummary invoiceSummary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedSummary = new InvoiceSummary(3, 170);//noOFRide,TotalFare
+            Assert.AreEqual(expectedSummary, expectedSummary);
+        }
+        [Test]
+        public void GivenThreeMultipleRideShouldReturn_MinimumInvoiceSummarryForNormalRide()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { new Ride(0.0, 5), new Ride(-3.0, 0), new Ride(1.0,2) };//distance/time->10+10+10->>30
+            InvoiceSummary invoiceSummary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedSummary = new InvoiceSummary(3, 30);//noOFRide,TotalFare
+            Assert.AreEqual(expectedSummary, expectedSummary);
+        }
+
+        /// <summary>
+        /// checking for multiple rides return MinimumFare in InvoiceSummary;
+        /// </summary>
+        [Test]
+        public void GivenMultipleRideShouldReturn_InvoiceSummaryForPremiumRide()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            Ride[] rides = { new Ride(5, 5), new Ride(10, 10) };//distance/time->85+170->255
+            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 255); //noOFRide,TotalFare 
+            Assert.AreEqual(summary, expectedSummary);
+        }
+        /// <summary>
+        /// checking for multiple rides return MinimumFare in InvoiceSummary;
+        /// </summary>
+        [Test]
+        public void GivenMultipleRideShouldReturn_MinimumInvoiceSummaryForPremiumRide()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            Ride[] rides = { new Ride(0.0, 7), new Ride(0.0, 5) };//distance/time->20+20--->40
+            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 40);//noOfRide,totalFare
+            Assert.AreEqual(summary, expectedSummary);
+        }
     }
 }
