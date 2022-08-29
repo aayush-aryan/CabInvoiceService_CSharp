@@ -222,9 +222,7 @@ namespace CabInvoiceGeneratorTest
             //Asserting Values
             Assert.AreEqual(expected, Minimumfare);
         }
-
         //UC2
-        
         [Test]
         public void GivenMultipleRideShouldReturn_InvoiceSummarryForNormalRide()
         {
@@ -278,15 +276,35 @@ namespace CabInvoiceGeneratorTest
             InvoiceSummary expectedSummary = new InvoiceSummary(2, 40);//noOfRide,totalFare
             Assert.AreEqual(summary, expectedSummary);
         }
+        /// <summary>
+        /// test cases for getting List Of Rides for Normal user;
+        /// </summary>
         [Test]
         public void GivenAUserIDTheInvoiceServiceGetsTheListOfRidesFromTheRideRepositoryAndReturnsTheInvoiceForNormal()
         {
             InvoiceGenerator invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
             Ride[] rides = { new Ride(2, 5), new Ride(10, 5) };
             RideRepository rideRepository = new RideRepository();
-            rideRepository.AddRide("xyz", rides);
-            Ride[] rideArray = rideRepository.GetRides("xyz");
-            InvoiceSummary summary = new InvoiceSummary(2, 130);
+            rideRepository.AddRide("aayush", rides); //userId,rides;
+            Ride[] rideArray = rideRepository.GetRides("aayush");
+            InvoiceSummary summary = new InvoiceSummary(2, 130);//noOFRide,TotalFare 
+
+            InvoiceSummary expectedSummary = invoiceGenerator.CalculateFare(rideArray);
+            Assert.AreEqual(expectedSummary, summary);
+        }
+        /// <summary>
+        /// test cases for getting List Of Rides for PREMIUM user;
+        /// </summary>
+        [Test]
+        public void GivenAUserIDTheInvoiceServiceGetsTheListOfRidesFromTheRideRepositoryAndReturnsTheInvoiceForPremium()
+        {
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            Ride[] rides = { new Ride(2, 5), new Ride(10, 5) };//40+160
+            RideRepository rideRepository = new RideRepository();
+            rideRepository.AddRide("aryan", rides);//userId,rides;
+            Ride[] rideArray = rideRepository.GetRides("aryan");
+            InvoiceSummary summary = new InvoiceSummary(2, 200);//noOFRide,TotalFare 
+
             InvoiceSummary expectedSummary = invoiceGenerator.CalculateFare(rideArray);
             Assert.AreEqual(expectedSummary, summary);
         }
